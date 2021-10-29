@@ -10,17 +10,17 @@ import { AddTrax } from './components/AddTrax';
 
 const Web3 = require('web3');
 const rpcURL = "HTTP://127.0.0.1:7545";
-const Tx = require("ethereumjs-tx").Transaction;
+// const Tx = require("ethereumjs-tx").Transaction;
 const web3 = new Web3(rpcURL);
-const accountS = '0x70a52deD8F307D00996AEB9D6FBF2552cc0d10B7';
-const private_key = "ae35c844d5eb27e636030f741f77879bb1afbe1266df10cac9c946663e79ed74";
-const Private_KeyS = Buffer.from(private_key, 'hex');
+// const accountS = '0x70a52deD8F307D00996AEB9D6FBF2552cc0d10B7';
+// const private_key = "ae35c844d5eb27e636030f741f77879bb1afbe1266df10cac9c946663e79ed74";
+// const Private_KeyS = Buffer.from(private_key, 'hex');
 
-const detail = "Bill";
-const amount = "-50";
+// const detail = "Bill";
+// const amount = "-50";
 
 let ABI = require("./IETabi.js");
-const contractAddress = "0xE725909AD07cc975a5a41477d6934dd04567D46b";
+const contractAddress = "0xB1D553fB4F823cdcB8Dbc603BA74832F614A2a4d";
 
 const contract = new web3.eth.Contract(ABI, contractAddress);
 
@@ -29,6 +29,9 @@ const contract = new web3.eth.Contract(ABI, contractAddress);
 function App() {
 
   const [bal, setbal] = useState(0);
+  const [inc, setinc] = useState(0);
+  const [exp, setexp] = useState(0);
+  const [event, setevent] = useState(0);
 
 
 
@@ -58,14 +61,29 @@ function App() {
       // console.log("singedTransaction", singedTransaction);
 
       const balance = await contract.methods.getBalance().call();
-      console.log("Net Balance", balance);
+      // console.log("Net Balance", balance);
       setbal(balance);
 
-      // let getEvent = await contract.getPastEvents('traxHistory',{
-      //     fromBlock:  0,
-      //     toBlock: "latest"
-      // });
-      // console.log("Trax-History", getEvent);
+      const inc = await contract.methods.getIncome().call();
+        // console.log("Income", inc);
+        setinc(inc)
+
+      const exp = await contract.methods.getExpense().call();
+        // console.log("Expense", exp);
+        setexp(exp)
+
+      let getAllEvents = await contract.getPastEvents('AllEvents',{
+            fromBlock:  0,
+            toBlock: "latest"
+        });
+        // console.log("No of Total Events", getAllEvents);
+        setevent(getAllEvents)
+
+        // let getEvent = await contract.getPastEvents('traxHistory',{
+        //     fromBlock:  0,
+        //     toBlock: "latest"
+        // });
+
     }
     catch (error) {
       console.log('error', error)
@@ -81,9 +99,9 @@ function App() {
 
       <Header />
       <br />
-      <Balance name={bal}/>
-      <TraxSummary />
-      <TraxHistory />
+      <Balance nameBal={bal}/>
+      <TraxSummary nameInc={inc} nameExp={exp}/>
+      <TraxHistory nameEvent = {event} />
       <AddTrax />
 
     </div>

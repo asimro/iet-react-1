@@ -1,18 +1,19 @@
 import React from 'react'
 
-export const TraxSummary = () => {
+export const TraxSummary = (prop) => {
     return (
         <div className="inc-exp-container">
             <div>
                 <h4>Income</h4>
                 <p className="money plus">
-                    $ income
+                    $ {prop.nameInc}
                 </p>
             </div>
             <div>
                 <h4>Expense</h4> 
                 <p className="money minus">
-                    $ expense
+                       $ {-prop.nameExp}
+
                 </p>
             </div>
             

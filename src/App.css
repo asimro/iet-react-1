@@ -49,7 +49,7 @@ h4 {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
-   color: black;
+  color: black;
 }
 
 .inc-exp-container > div {
@@ -111,18 +111,20 @@ input[type='number'] {
 .list {
   list-style-type: none;
   padding: 0;
-  margin-bottom: 40px;
+  margin-bottom: 3px;
+  text-align: center;
 }
 
 .list li {
   background-color: #fff;
-  box-shadow: var(--box-shadow);
+  /* box-shadow: var(--box-shadow); */
   color: #333;
   display: flex;
   justify-content: space-between;
   position: relative;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 3px;
+  margin: 3px;
+  text-align: left;
 }
 
 .list li.plus {
