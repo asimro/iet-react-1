@@ -1,4 +1,5 @@
 import React from 'react'
+import '../App.css';
 
 export const TraxHistory = (prop) => {
 
@@ -19,7 +20,7 @@ export const TraxHistory = (prop) => {
                                 {ev.returnValues._detail}
                             </li>
                             <li>
-                                ${(ev.returnValues._amount).toLocaleString("en-US")}
+                                ${ev.returnValues._amount}
                             </li>
                         </li>
                     </ul>
