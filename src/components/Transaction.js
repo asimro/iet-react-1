@@ -6,24 +6,14 @@ import { Header } from './Header';
 import { Balance } from './Balance';
 import { TraxSummary } from './TraxSummary';
 import { TraxHistory } from './TraxHistory';
-// import { AddTrax } from './AddTrax';
-
 
 const Web3 = require('web3');
 const rpcURL = "https://ropsten.infura.io/v3/80c615a196014e1ca02ebafef471988d";
-const Tx = require("ethereumjs-tx").Transaction;
 const web3 = new Web3(rpcURL);
-
-const accountS = '0x53Acdd0B5C83B9BA58849f07B8B88301C37f9619';
-const private_key = "c85927cd1d3aedcfc615155149aaa8c13ca26f9d77704ed71abfc9e15a9949ef";
-const Private_KeyS = Buffer.from(private_key, 'hex');
 
 let ABI = require("../IETabi.js");
 const contractAddress = "0xfc5524A98a97Cbc5005367D0dAA2379862396917";
-
 const contract = new web3.eth.Contract(ABI, contractAddress);
-
-
 
 export const Transaction = () => {
 
@@ -40,36 +30,52 @@ export const Transaction = () => {
         eventSt: event
     };
 
-
-    const addTransaction = async () => {
+    const loadBlockChain = async () => {
         try {
-            // creating transaction object
-            let txCount = await web3.eth.getTransactionCount(accountS);
-            const txObject = {
-            nonce: web3.utils.toHex(txCount),
-            to: contractAddress,
-            data: contract.methods.addEntry(description, amount).encodeABI(),
-            gasLimit: web3.utils.toHex(6000000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei'))
-        }
+            if (Web3.givenProvider) {
+                //Enabling web3 injecter in browser
+                const web3 = new Web3(Web3.givenProvider);
+                await Web3.givenProvider.enable();
+                // console.log("Web3 provider", web3)
 
-        // signing transaction with private key
-        const tx = new Tx(txObject, { chain: 'ropsten', hardfork: 'petersburg' });
-        tx.sign(Private_KeyS);
-        const serialized = tx.serialize();
-        const raw = '0x' + serialized.toString('hex');
-
-        // sending transaction on blockchain
-        const singedTransaction = await web3.eth.sendSignedTransaction(raw);
-        console.log("singedTransaction", singedTransaction);
-            getBalances();
-            
+                //getting account address from metamask 
+                const accounts = await web3.eth.getAccounts();
+                // console.log("Account", accounts);
+            }
         }
         catch (error) {
-            console.log('add transactions error', error)
+            console.log('Web3 Load Error', error)
         }
     }
 
+    const addTransaction = async () => {
+        try {
+            if (Web3.givenProvider) {
+                //Enabling web3 injecter in browser
+                const web3 = new Web3(Web3.givenProvider);
+                await Web3.givenProvider.enable();
+                // console.log("Web3 provider", web3)
+
+                //getting account address from metamask 
+                const accounts = await web3.eth.getAccounts();
+                // console.log("Account", accounts);
+
+                //getting contract address and ABI from given file
+                const contract = new web3.eth.Contract(ABI, contractAddress);
+                // console.log('Contract ', contract);
+                // console.log('Contract methods', contract.methods);
+
+                //transation calling / invoking
+                const sendTransaction = await contract.methods.addEntry(description, amount).send({ from: accounts[0] });
+                // console.log('sendTransaction', sendTransaction);
+
+                getBalances();
+            }
+        }
+        catch (error) {
+            console.log('add transaction method error', error)
+        }
+    }
 
     const getBalances = async () => {
         try {
@@ -91,11 +97,6 @@ export const Transaction = () => {
             });
             // console.log("No of Total Events", getAllEvents);
             setevent(getAllEvents)
-
-            // let getEvent = await contract.getPastEvents('traxHistory',{
-            //     fromBlock:  0,
-            //     toBlock: "latest"
-            // });
         }
         catch (error) {
             console.log('get balances error', error)
@@ -104,40 +105,42 @@ export const Transaction = () => {
     // getBalances()
 
 
-
     return (
         <div className="container">
             <Header />
             <br />
+            <button onClick={loadBlockChain} className="btnweb3">Load Web3 </button>
             <Balance nameBal={state.balSt} />
             <TraxSummary nameInc={state.incSt} nameExp={state.expSt} />
             <TraxHistory nameEvent={state.eventSt} />
+            <button onClick={() => { getBalances() }} className="btn">
+                    Get Transaction History
+                </button>
 
-            {/* <AddTrax nameDes={description} nameAmt={amount} /> */}
             <div>
                 <h3>Adding New Transactions</h3>
                 {/* <form > */}
-                    <div className="form-control">
-                        <label >Description</label>
-                        <input type="text"
-                            value={description}
-                            id="description"
-                            onChange={(e) => setdescription(e.target.value)}
-                            placeholder="Transaction Details"
-                        />
-                    </div>
+                <div className="form-control">
+                    <label >Description</label>
+                    <input type="text"
+                        value={description}
+                        id="description"
+                        onChange={(e) => setdescription(e.target.value)}
+                        placeholder="Transaction Details"
+                    />
+                </div>
 
-                    <div className="form-control">
-                        <label >Amount</label>
-                        <input type="number"
-                            value={amount}
-                            onChange={(e) => setamount(e.target.value)}
-                            placeholder="Value of Transaction"
-                        />
-                    </div>
-                    <button onClick={() => { addTransaction() }} className="btn">
-                        Add Transaction
-                    </button>
+                <div className="form-control">
+                    <label >Amount</label>
+                    <input type="number"
+                        value={amount}
+                        onChange={(e) => setamount(e.target.value)}
+                        placeholder="Value of Transaction"
+                    />
+                </div>
+                <button onClick={() => { addTransaction() }} className="btn">
+                    Add Transaction
+                </button>
                 {/* </form> */}
             </div>
 

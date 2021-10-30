@@ -168,13 +168,13 @@ input[type="number"] {
 
 .btnweb3 {
   cursor: pointer;
-  background-color: rgba(140, 233, 18, 0.904);
+  background-color: rgba(248, 217, 42, 0.925);
   box-shadow: var(--box-shadow);
-  color: rgba(2, 68, 221, 0.904);
+  color: rgb(16, 13, 199);
   border: 0;
   border-radius: 15px;
   display: block;
-  font-size: 20px;
+  font-size: 25px;
   font-style: oblique;
   font-weight: bolder;
   margin: 10px 0 20px;
