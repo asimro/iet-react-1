@@ -10,13 +10,13 @@ export const TraxSummary = (prop) => {
                 </p>
             </div>
             <div>
-                <h4>Expense</h4> 
+                <h4>Expense</h4>
                 <p className="money minus">
-                       $ {-prop.nameExp}
+                    $ {-prop.nameExp}
 
                 </p>
             </div>
-            
+
         </div>
     )
 }

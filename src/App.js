@@ -17,7 +17,7 @@ const web3 = new Web3(rpcURL);
 // const Private_KeyS = Buffer.from(private_key, 'hex');
 
 // const detail = "Bill";
-// const amount = "-50";
+// const amt = "-50";
 
 let ABI = require("./IETabi.js");
 const contractAddress = "0xB1D553fB4F823cdcB8Dbc603BA74832F614A2a4d";
@@ -32,6 +32,8 @@ function App() {
   const [inc, setinc] = useState(0);
   const [exp, setexp] = useState(0);
   const [event, setevent] = useState(0);
+  const [description, setdescription] = useState(0);
+  const [amount, setamount] = useState(0);
 
 
 
@@ -45,7 +47,7 @@ function App() {
       // const txObject = {
       //     nonce: web3.utils.toHex(txCount),
       //     to: contractAddress,
-      //     data: contract.methods.addEntry(detail, amount).encodeABI(),
+      //     data: contract.methods.addEntry(detail, amt).encodeABI(),
       //     gasLimit: web3.utils.toHex(6000000),
       //     gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei'))
       // }
@@ -65,24 +67,24 @@ function App() {
       setbal(balance);
 
       const inc = await contract.methods.getIncome().call();
-        // console.log("Income", inc);
-        setinc(inc)
+      // console.log("Income", inc);
+      setinc(inc)
 
       const exp = await contract.methods.getExpense().call();
-        // console.log("Expense", exp);
-        setexp(exp)
+      // console.log("Expense", exp);
+      setexp(exp)
 
-      let getAllEvents = await contract.getPastEvents('AllEvents',{
-            fromBlock:  0,
-            toBlock: "latest"
-        });
-        // console.log("No of Total Events", getAllEvents);
-        setevent(getAllEvents)
+      let getAllEvents = await contract.getPastEvents('AllEvents', {
+        fromBlock: 0,
+        toBlock: "latest"
+      });
+      // console.log("No of Total Events", getAllEvents);
+      setevent(getAllEvents)
 
-        // let getEvent = await contract.getPastEvents('traxHistory',{
-        //     fromBlock:  0,
-        //     toBlock: "latest"
-        // });
+      // let getEvent = await contract.getPastEvents('traxHistory',{
+      //     fromBlock:  0,
+      //     toBlock: "latest"
+      // });
 
     }
     catch (error) {
@@ -91,7 +93,7 @@ function App() {
   }
   contractWrite()
 
-  
+
 
 
   return (
@@ -99,10 +101,10 @@ function App() {
 
       <Header />
       <br />
-      <Balance nameBal={bal}/>
-      <TraxSummary nameInc={inc} nameExp={exp}/>
-      <TraxHistory nameEvent = {event} />
-      <AddTrax />
+      <Balance nameBal={bal} />
+      <TraxSummary nameInc={inc} nameExp={exp} />
+      <TraxHistory nameEvent={event} />
+      <AddTrax nameDes={description} nameAmt={amount}/>
 
     </div>
   );
