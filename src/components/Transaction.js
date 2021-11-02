@@ -109,7 +109,7 @@ export const Transaction = () => {
         <div className="container">
             <Header />
             <br />
-            <button onClick={loadBlockChain} className="btnweb3">Load Web3 </button>
+            <button onClick={loadBlockChain} className="btnweb3">Connect Your Wallet </button>
             <Balance nameBal={state.balSt} />
             <TraxSummary nameInc={state.incSt} nameExp={state.expSt} />
             <TraxHistory nameEvent={state.eventSt} />
