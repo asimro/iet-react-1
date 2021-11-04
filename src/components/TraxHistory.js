@@ -1,15 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { UserContext } from '../context/contextAPI';
 import '../App.css';
 
-export const TraxHistory = (prop) => {
+export const TraxHistory = () => {
 
-    const trxEvent = prop.nameEvent;
+    const [{getAllEvents}] = useContext(UserContext)
 
     return (
         <div>
             <h3>Transaction History </h3>
 
-            {trxEvent ? trxEvent.map((ev) => {
+            {getAllEvents ? getAllEvents.map((ev) => {
                 return (
                     <ul className="list">
                         <li>

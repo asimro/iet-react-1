@@ -1,18 +1,30 @@
 import React from 'react';
 import './App.css';
 
-import { Transaction } from './components/Transaction';
+
+import { Header } from './components/Header';
+import { Balance } from './components/Balance';
+import { TraxSummary } from './components/TraxSummary';
+import { TraxHistory } from './components/TraxHistory';
+import { AddTrax } from './components/AddTrax';
+import { ContextProvider } from './context/contextAPI';
 
 
 
 function App() {
 
   return (
+    
+    <ContextProvider>
     <div className="container">
-
-      <Transaction/>
+      <Header/>
+      <Balance/>
+      <TraxSummary/>
+      <TraxHistory/>
+      <AddTrax/>
 
     </div>
+    </ContextProvider>
   );
 }
 
