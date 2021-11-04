@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../context/contextAPI';
 import '../App.css';
 
-export const TraxSummary = (prop) => {
+export const TraxSummary = () => {
+    const [{ income }] = useContext(UserContext);
+    const [{ expense }] = useContext(UserContext);
+
     return (
         <div className="inc-exp-container">
             <div>
                 <h4>Income</h4>
                 <p className="money plus">
-                    $ {prop.nameInc}
+                    $ {income}
                 </p>
             </div>
             <div>
                 <h4>Expense</h4>
                 <p className="money minus">
-                    $ {-prop.nameExp}
-
+                    $ {-expense}
                 </p>
             </div>
 

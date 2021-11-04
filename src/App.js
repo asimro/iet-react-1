@@ -1,29 +1,29 @@
 import React from 'react';
 
-import './App.css';
-import { Balance } from './components/Balance';
+
 import { Header } from './components/Header';
-import { Transaction } from './components/Transaction';
-import { TraxHistory } from './components/TraxHistory';
+import { Balance } from './components/Balance';
 import { TraxSummary } from './components/TraxSummary';
-import { GlobalProvider } from './context/GlobalState';
+import { TraxHistory } from './components/TraxHistory';
+import { AddTrax } from './components/AddTrax';
+import { ContextProvider } from './context/contextAPI';
 
 
 
 function App() {
 
   return (
-    <GlobalProvider>
+    
+    <ContextProvider>
+    <div className="container">
+      <Header/>
+      <Balance/>
+      <TraxSummary/>
+      <TraxHistory/>
+      <AddTrax/>
 
-      <div className="container">
-        <Header />
-        <Balance />
-        <TraxSummary />
-        <TraxHistory />
-        <Transaction />
-      </div>
-
-    </GlobalProvider>
+    </div>
+    </ContextProvider>
   );
 }
 
