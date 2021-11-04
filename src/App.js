@@ -1,18 +1,29 @@
 import React from 'react';
-import './App.css';
 
+import './App.css';
+import { Balance } from './components/Balance';
+import { Header } from './components/Header';
 import { Transaction } from './components/Transaction';
+import { TraxHistory } from './components/TraxHistory';
+import { TraxSummary } from './components/TraxSummary';
+import { GlobalProvider } from './context/GlobalState';
 
 
 
 function App() {
 
   return (
-    <div className="container">
+    <GlobalProvider>
 
-      <Transaction/>
+      <div className="container">
+        <Header />
+        <Balance />
+        <TraxSummary />
+        <TraxHistory />
+        <Transaction />
+      </div>
 
-    </div>
+    </GlobalProvider>
   );
 }
 

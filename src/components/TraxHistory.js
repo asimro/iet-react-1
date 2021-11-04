@@ -28,6 +28,9 @@ export const TraxHistory = (prop) => {
             })
                 : ""
             }
+            {/* <button onClick={() => { getBalances() }} className="btn">
+                    Get Transaction History
+                </button> */}
         </div>
     )
 }
