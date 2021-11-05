@@ -21,10 +21,9 @@ export const AppReducer = (state, action) => {
         ...state, getAllEvents: action.payload
       }
 
-      case 'Set_Trax':
+    case 'Set_Trax':
       return {
-        ...state, 
-        transaction: [action.payload, ...state.transaction]
+        ...state, transaction: [action.payload, ...state.transaction]
       }
 
     default:

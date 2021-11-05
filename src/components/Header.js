@@ -1,7 +1,9 @@
 import React from "react";
 import '../App.css';
 
+
 export const Header = () => {
+
     return (
         <div>
 
@@ -9,7 +11,7 @@ export const Header = () => {
                 Income & Expense Statement
             </h1>
 
-            {/* <button onClick={loadBlockChain} className="btnweb3">Connect Your Wallet </button> */}
+            {/* <button onClick={loading} className="btnweb3">Connect Your Wallet </button> */}
         </div>
     )
 }

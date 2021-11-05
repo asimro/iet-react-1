@@ -1,22 +1,26 @@
 import React, { useContext, useState } from 'react'
 import '../App.css';
+
 import { UserContext } from '../context/contextAPI';
-import { addTransaction } from '../context/web3';
+import { AddTransaction } from '../context/web3';
+import { setTrax } from '../context/Actions'
 
 export const AddTrax = () => {
 
     const [amount, setAmount] = useState();
     const [description, setDescription] = useState();
-    const [dispatch] = useContext(UserContext)
+    const [{dispatch}] = useContext(UserContext)
 
 
-    const onSubmit = async () => {
+    const OnSubmit = async () => {
         try {
-            const transactions= {
+            const transactions = {
                 Description: description,
                 Amount: amount
             }
-            await addTransaction(transactions, dispatch);
+            console.log(transactions);
+            await dispatch(setTrax(transactions));
+            await AddTransaction();
         }
         catch (error) {
             console.log("error onSubmit trax = ", error);
@@ -27,7 +31,8 @@ export const AddTrax = () => {
     return (
         <div>
             <h3>Adding New Transactions</h3>
-            <form onSubmit={onSubmit}>
+            <h3> {description} {amount }</h3>
+            <form onSubmit={OnSubmit}> 
                 <div className="form-control">
                     <label htmlFor="description">
                         Description
@@ -53,7 +58,7 @@ export const AddTrax = () => {
                         required="required"
                     />
                 </div>
-                <button className="btn">
+                <button className="btn" > 
                     Add Transaction
                 </button>
             </form>
