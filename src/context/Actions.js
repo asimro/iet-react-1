@@ -48,6 +48,13 @@ export const setEvents = (getAllEvents) => {
     };
 }
 
+export const setError = (Error) => {
+    return {
+        type: 'Set_Error',
+        payload: Error
+    };
+}
+
 export const setTrax = (transactions) => {
     return {
         type: 'Set_Trax',

@@ -10,6 +10,7 @@ const initialState = {
     income: 0,
     expnese: 1,
     getAllEvents: [],
+    Error: null,
     transaction: []
 }
 

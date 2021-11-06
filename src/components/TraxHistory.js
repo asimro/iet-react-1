@@ -5,7 +5,8 @@ import '../App.css';
 
 export const TraxHistory = () => {
 
-    const [{ getAllEvents, contract}, dispatch] = useContext(UserContext)
+    const [{ getAllEvents, contract }, dispatch] = useContext(UserContext)
+
 
     return (
         <div>

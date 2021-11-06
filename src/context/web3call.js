@@ -1,4 +1,4 @@
-import { setupWeb3, setAccounts, setContractAddress, setBalance, setIncome, setExpense, setEvents } from './Actions';
+import { setupWeb3, setAccounts, setContractAddress, setBalance, setIncome, setExpense, setEvents, setError } from './Actions';
 import Web3 from 'web3';
 
 let ABI = require("../IETabi.js");
@@ -54,5 +54,6 @@ export const loadHistory = async (contract, dispatch) => {
     }
     catch (error) {
         console.log('Web3 Load_History Error', error)
+        dispatch(setError("First Connect Your Wallet"))
     }
 }

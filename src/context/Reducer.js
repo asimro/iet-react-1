@@ -36,6 +36,11 @@ export const AppReducer = (state, action) => {
         ...state, getAllEvents: action.payload
       }
 
+    case 'Set_Error':
+      return {
+        ...state, Error: action.payload
+      }
+
     case 'Set_Trax':
       return {
         ...state, transaction: [action.payload, ...state.transaction]
