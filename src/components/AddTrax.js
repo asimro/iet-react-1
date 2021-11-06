@@ -6,7 +6,6 @@ import '../App.css';
 
 
 export const AddTrax = () => {
-
     const [amount, setAmount] = useState();
     const [description, setDescription] = useState();
     const [{ accounts, contract }, dispatch] = useContext(UserContext);
@@ -24,16 +23,15 @@ export const AddTrax = () => {
             await loadHistory(contract, dispatch);
             await loadBlockChain(dispatch);
         }
-
         catch (error) {
             console.log("error onSubmit trax = ", error);
         }
     }
 
-
     return (
         <div>
-            <h3>Adding New Transactions</h3>
+            <h3>Adding New Transactions <br />
+                (Income &nbsp;= &nbsp;+ &emsp; and  &emsp;Expenses &nbsp;= &nbsp;-&nbsp;) </h3>
             <form onSubmit={onSubmit}>
                 <div className="form-control">
                     <label htmlFor="description">

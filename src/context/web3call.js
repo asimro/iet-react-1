@@ -2,7 +2,7 @@ import { setupWeb3, setAccounts, setContractAddress, setBalance, setIncome, setE
 import Web3 from 'web3';
 
 let ABI = require("../IETabi.js");
-const ContractAddress = "0xfc5524A98a97Cbc5005367D0dAA2379862396917";
+const ContractAddress = "0x6b858Be9185633585488CE644549A817E1fBaBAc";
 
 
 export const loadBlockChain = async (dispatch) => {
