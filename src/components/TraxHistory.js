@@ -1,10 +1,11 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../context/contextAPI';
+import { loadHistory } from '../context/web3call';
 import '../App.css';
 
 export const TraxHistory = () => {
 
-    const [{getAllEvents}] = useContext(UserContext)
+    const [{ getAllEvents, contract}, dispatch] = useContext(UserContext)
 
     return (
         <div>
@@ -21,7 +22,7 @@ export const TraxHistory = () => {
                                 {ev.returnValues._detail}
                             </li>
                             <li>
-                                ${ev.returnValues._amount}
+                                ${(ev.returnValues._amount).toLocaleString("en-US")}
                             </li>
                         </li>
                     </ul>
@@ -29,9 +30,9 @@ export const TraxHistory = () => {
             })
                 : ""
             }
-            {/* <button onClick={() => { getBalances() }} className="btn">
-                    Get Transaction History
-                </button> */}
+            <button onClick={() => { loadHistory(contract, dispatch) }} className="btn">
+                Get Transaction History
+            </button>
         </div>
     )
 }

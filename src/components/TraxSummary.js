@@ -3,8 +3,7 @@ import { UserContext } from '../context/contextAPI';
 import '../App.css';
 
 export const TraxSummary = () => {
-    const [{ income }] = useContext(UserContext);
-    const [{ expense }] = useContext(UserContext);
+    const [{ income, expense }] = useContext(UserContext);
 
     return (
         <div className="inc-exp-container">

@@ -1,27 +1,30 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../context/contextAPI';
+import { AddTransaction } from '../context/web3trax';
+import { loadHistory, loadBlockChain } from '../context/web3call';
 import '../App.css';
 
-import { UserContext } from '../context/contextAPI';
-import { AddTransaction } from '../context/web3';
-import { setTrax } from '../context/Actions'
 
 export const AddTrax = () => {
 
     const [amount, setAmount] = useState();
     const [description, setDescription] = useState();
-    const [{ dispatch }] = useContext(UserContext);
+    const [{ accounts, contract }, dispatch] = useContext(UserContext);
 
-
-    const OnSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
         try {
             const transactions = {
                 Description: description,
                 Amount: amount
             }
             console.log(transactions);
-            await dispatch(setTrax(transactions));
-            await AddTransaction();
+
+            await AddTransaction(accounts, contract, transactions, dispatch);
+            await loadHistory(contract, dispatch);
+            await loadBlockChain(dispatch);
         }
+
         catch (error) {
             console.log("error onSubmit trax = ", error);
         }
@@ -31,7 +34,7 @@ export const AddTrax = () => {
     return (
         <div>
             <h3>Adding New Transactions</h3>
-            <form onSubmit={OnSubmit}>
+            <form onSubmit={onSubmit}>
                 <div className="form-control">
                     <label htmlFor="description">
                         Description

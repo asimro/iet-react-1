@@ -1,5 +1,4 @@
 // Actions
-
 export const setupWeb3 = (web3) => {
     return {
         type: 'Setup_Web3',
@@ -11,6 +10,13 @@ export const setAccounts = (accounts) => {
     return {
         type: 'Set_Accounts',
         payload: accounts
+    };
+}
+
+export const setContractAddress = (contract) => {
+    return {
+        type: 'Set_Contract_Address',
+        payload: contract
     };
 }
 

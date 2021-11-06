@@ -1,6 +1,21 @@
 export const AppReducer = (state, action) => {
   switch (action.type) {
 
+    case 'Set_Web3':
+      return {
+        ...state, Web3: action.payload
+      }
+
+    case 'Set_Accounts':
+      return {
+        ...state, accounts: action.payload
+      }
+
+    case 'Set_Contract_Address':
+      return {
+        ...state, contract: action.payload
+      }
+
     case 'Set_Balance':
       return {
         ...state, balance: action.payload

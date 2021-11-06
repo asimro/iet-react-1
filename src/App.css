@@ -8,8 +8,9 @@
   box-sizing: border-box;
 }
 
+/* #060e0be7 */
 body {
-  background-color: #060e0be7;
+  background-color: #010913ee;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,8 +38,9 @@ h3 {
 }
 
 h4 {
-  margin: 0;
+  margin: 5px;
   text-transform: uppercase;
+  font-size: larger;
 }
 
 .inc-exp-container {
@@ -170,7 +172,7 @@ input[type="number"] {
   cursor: pointer;
   background-color: rgba(248, 217, 42, 0.925);
   box-shadow: var(--box-shadow);
-  color: rgb(16, 13, 199);
+  color: rgb(9, 8, 97);
   border: 0;
   border-radius: 15px;
   display: block;
