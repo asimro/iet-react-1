@@ -80,16 +80,16 @@ export const AddTransaction = async () => {
             //Enabling web3 injecter in browser
             const web3 = new Web3(Web3.givenProvider);
             await Web3.givenProvider.enable();
-            console.log("Web3 provider", web3)
+            // console.log("Web3 provider", web3)
 
             //getting account address from metamask 
             const accounts = await web3.eth.getAccounts();
-            console.log("Account", accounts);
+            // console.log("Account", accounts);
 
             //getting contract address and ABI from given file
             const contract = new web3.eth.Contract(ABI, contractAddress);
-            console.log('Contract ', contract);
-            console.log('Contract methods', contract.methods);
+            // console.log('Contract ', contract);
+            // console.log('Contract methods', contract.methods);
 
             //transation calling / invoking
             const sendTransaction = await contract.methods.addEntry(des, amt).send({ from: accounts[0] });
@@ -100,5 +100,5 @@ export const AddTransaction = async () => {
     catch (error) {
         console.log('add transaction method error', error)
     }
-    // AddTransaction();
+    AddTransaction();
 }

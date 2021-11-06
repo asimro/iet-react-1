@@ -9,7 +9,7 @@ export const AddTrax = () => {
 
     const [amount, setAmount] = useState();
     const [description, setDescription] = useState();
-    const [{dispatch}] = useContext(UserContext)
+    const [{ dispatch }] = useContext(UserContext);
 
 
     const OnSubmit = async () => {
@@ -31,8 +31,7 @@ export const AddTrax = () => {
     return (
         <div>
             <h3>Adding New Transactions</h3>
-            <h3> {description} {amount }</h3>
-            <form onSubmit={OnSubmit}> 
+            <form onSubmit={OnSubmit}>
                 <div className="form-control">
                     <label htmlFor="description">
                         Description
@@ -58,7 +57,7 @@ export const AddTrax = () => {
                         required="required"
                     />
                 </div>
-                <button className="btn" > 
+                <button className="btn" >
                     Add Transaction
                 </button>
             </form>

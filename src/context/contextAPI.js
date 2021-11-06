@@ -3,8 +3,8 @@ import { AppReducer } from './Reducer';
 import { laodBalances, loadBlockChain } from './web3';
 
 const initialState = {
-    // web3: null,
-    // accounts: [],
+    web3: null,
+    accounts: [],
     balance: 10,
     income: 11,
     expnese: 12,
